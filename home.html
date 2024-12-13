@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ComCamp Computer Shop</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+            background-color: black;
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+        }
+
+        .logo {
+            font-size: 2em;
+            color: #fff;
+            user-select: none;
+        }
+
+        .navigation a {
+            position: relative;
+            font-size: 1.1em;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 40px;
+        }
+
+        .navigation a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 100%;
+            height: 3px;
+            background: #fff;
+            border-radius: 5px;
+            transform: scaleX(0);
+            transition: .5s;
+        }
+
+        .navigation a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .navigation .btnLogin-popup {
+            width: 130px;
+            height: 50px;
+            background: transparent;
+            border: 2px solid #fff;
+            outline: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            color: #fff;
+            font-weight: 500;
+            margin-left: 40px;
+            transition: .5s;
+        }
+
+        .navigation .btnLogin-popup:hover {
+            background: #fff;
+            color: #162938;
+        }
+
+        .content {
+            flex-grow: 1;
+            margin-top: 100px; /* Space below fixed header */
+        }
+
+        /* Slider Styles */
+        .slider {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            font-size: 24px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .slide-1 {
+            background-image: url('https://images.pexels.com/photos/4298306/pexels-photo-4298306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        }
+
+        .slide-2 {
+            background-image: url('https://images.pexels.com/photos/5944189/pexels-photo-5944189.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        }
+
+        .slide-3 {
+            background-image: url('https://images.pexels.com/photos/6804455/pexels-photo-6804455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        }
+        .slide-4{
+            background-image: url('https://images.pexels.com/photos/11622659/pexels-photo-11622659.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        }
+
+        .slide-5{
+            background-image: url('https://images.pexels.com/photos/346642/pexels-photo-346642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+        }
+
+        .navigation-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .nav-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .footer {
+            background-color: #000000;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 10px 0 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .footer-links li {
+            display: inline;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #00bcd4;
+        }
+        .enhanced-product-slider {
+        position: relative;
+        width: 90%;
+        max-width: 1200px;
+        margin: 50px auto;
+        overflow: hidden;
+    }
+
+    .product-carousel {
+        display: flex;
+        gap: 20px;
+        transition: transform 0.6s ease;
+    }
+
+    .product-card {
+        min-width: 300px;
+        background: #000000;
+        border-radius: 10px;
+        text-align: center;
+        padding: 20px;
+        color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .product-card h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .product-card p {
+        font-size: 1em;
+        color: #ccc;
+    }
+
+    .product-nav {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+    }
+
+    .product-nav button {
+        background: rgba(68, 60, 60, 0.5);
+        border: none;
+        color: white;
+        font-size: 1.5em;
+        padding: 5px;
+        border-radius: 5%;
+        cursor: pointer;
+    }
+
+    .product-nav button:hover {
+        background: rgba(0, 0, 0, 0.8);
+    }
+
+    .poster-container {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 50px;
+        }
+
+        .poster-item {
+            width: 500px;
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background-color: black;
+            transition: transform 0.3s ease;
+        }
+
+        .poster-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .poster-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            transition: opacity 0.3s ease;
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+
+        .poster-item:hover .poster-info {
+            opacity: 1; /* Show the information on hover */
+        }
+
+        .poster-item:hover img {
+            transform: scale(1.1); /* Zoom in the image when hovered */
+        }
+
+        .view-info {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .view-info:hover {
+            background-color: rgba(0, 0, 0, 1);
+        }
+    
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2 class="logo"><a href="index.html">Logo</a></h2>
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="aboutus.html">About</a>
+            <a href="#">Shop</a>
+            <a href="#">Contact</a>
+            <button class="btnLogin-popup">Login</button>
+        </nav>
+    </header>
+
+    <div class="content">
+        <!-- Slider Section -->
+        <div class="slider">
+            <div class="slides">
+                <div class="slide slide-1">Welcome to KREZIER</div>
+                <div class="slide slide-2">KEYBOARD</div>
+                <div class="slide slide-3">MOUSE</div>
+                <div class="slide slide-4">LAPTOP</div>
+                <div class="slide slide-5">HEADPHONES</div>
+            </div>
+            <div class="navigation-buttons">
+                <button class="nav-button prev">❮</button>
+                <button class="nav-button next">❯</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="enhanced-product-slider">
+        <h2 style="text-align: center; color: white; margin-top: 50px;">Explore Our Products</h2>
+        <div class="product-carousel">
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/4523008/pexels-photo-4523008.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Nintendo Switch">
+                <h3>Gaming Keyboard</h3>
+                <p>High-performance RGB keyboard for gamers.</p>
+            </div>
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/4523008/pexels-photo-4523008.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Nintendo Switch">
+                <h3>Gaming Keyboard</h3>
+                <p>High-performance RGB keyboard for gamers.</p>
+            </div>
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/4523008/pexels-photo-4523008.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Nintendo Switch">
+                <h3>Gaming Keyboard</h3>
+                <p>High-performance RGB keyboard for gamers.</p>
+            </div>
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/4523008/pexels-photo-4523008.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Nintendo Switch">
+                <h3>Gaming Keyboard</h3>
+                <p>High-performance RGB keyboard for gamers.</p>
+            </div>
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/127304/pexels-photo-127304.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wireless Mouse">
+                <h3>Wireless Mouse</h3>
+                <p>Ergonomic and precision wireless mouse.</p>
+            </div>
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=600" alt="High-Performance Laptop">
+                <h3>High-Performance Laptop</h3>
+                <p>Top-notch laptops for work and play.</p>
+            </div>
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/5077042/pexels-photo-5077042.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Gaming Headset">
+                <h3>Gaming Headset</h3>
+                <p>Immersive audio for an unparalleled gaming experience.</p>
+            </div>
+        </div>
+        <div class="product-nav">
+            <button class="product-prev">&#10094;</button>
+            <button class="product-next">&#10095;</button>
+        </div>
+    </div>
+
+    <div class="poster-container">
+        <div class="poster-item">
+            <img src="https://images.pexels.com/photos/4298306/pexels-photo-4298306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Poster 1">
+            <div class="poster-info">
+                <h3 class="poster-title">daypo</h3>
+                <p class="poster-description">High-performance oten.</p>
+            </div>
+        </div>
+        
+        <div class="poster-item">
+            <img src="https://images.pexels.com/photos/5944189/pexels-photo-5944189.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Poster 2">
+            <div class="poster-info">
+                <h3 class="poster-title">KUPAL</h3>
+                <p class="poster-description">oten na gamay ni snachez.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 ComCamp. All Rights Reserved.</p>
+            <ul class="footer-links">
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#privacy">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        const slides = document.querySelector('.slides');
+        const slideCount = document.querySelectorAll('.slide').length;
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        let currentIndex = 0;
+
+        function updateSlidePosition() {
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex === 0) ? slideCount - 1 : currentIndex - 1;
+            updateSlidePosition();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slideCount;
+            updateSlidePosition();
+        });
+
+        // Auto slide
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slideCount;
+            updateSlidePosition();
+        }, 5000);
+        const productCarousel = document.querySelector('.product-carousel');
+    const productCards = document.querySelectorAll('.product-card');
+    const productPrev = document.querySelector('.product-prev');
+    const productNext = document.querySelector('.product-next');
+    let productIndex = 0;
+    const visibleCards = 3;
+
+    function updateProductCarousel() {
+        const cardWidth = productCards[0].clientWidth + 20; // Include gap
+        const offset = -(productIndex * cardWidth);
+        productCarousel.style.transform = `translateX(${offset}px)`;
+    }
+
+    productPrev.addEventListener('click', () => {
+        productIndex = Math.max(productIndex - 1, 0);
+        updateProductCarousel();
+    });
+
+    productNext.addEventListener('click', () => {
+        productIndex = Math.min(productIndex + 1, productCards.length - visibleCards);
+        updateProductCarousel();
+    });
+
+    // Auto-slide functionality
+    setInterval(() => {
+        productIndex = (productIndex + 1) % productCards.length;
+        if (productIndex > productCards.length - visibleCards) {
+            productIndex = 0;
+        }
+        updateProductCarousel();
+    }, 7000);
+    </script>
+</body>
+
+</html>
